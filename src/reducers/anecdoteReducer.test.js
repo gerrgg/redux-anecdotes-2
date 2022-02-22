@@ -9,7 +9,7 @@ describe("unicafe reducer", () => {
       votes: 0,
     },
     {
-      content: "If it hurts, do it more often",
+      content: "state changes are made with actions",
       id: 2,
       votes: 0,
     },
@@ -18,36 +18,40 @@ describe("unicafe reducer", () => {
   const getID = () => initialState.length + 1;
 
   test("votes are incremented", () => {
-    const action = {
-      type: "VOTE",
-      data: { id: 1 },
-    };
-
     const state = initialState;
+
+    const action = {
+      type: "anecdotes/vote",
+      payload: 2,
+    };
 
     deepFreeze(state);
 
     const newState = anecdoteReducer(state, action);
 
-    expect(newState[0].votes).toEqual(initialState[0].votes + 1);
+    expect(newState).toHaveLength(2);
+
+    expect(newState).toContainEqual(state[0]);
+
+    expect(newState).toContainEqual({
+      content: "state changes are made with actions",
+      votes: 1,
+      id: 2,
+    });
   });
 
   test("new anecdotes can be added", () => {
+    const state = [];
     const action = {
-      type: "NEW_ANECDOTE",
-      data: {
-        content: "Some content",
-        id: getID(),
-        votes: 0,
-      },
+      type: "anecdotes/createAnecdote",
+      payload: "Content",
     };
-
-    const state = initialState;
 
     deepFreeze(state);
 
     const newState = anecdoteReducer(state, action);
 
-    expect(newState).toEqual(state.concat(action.data));
+    expect(newState).toHaveLength(1);
+    expect(newState.map((s) => s.content)).toContainEqual(action.payload);
   });
 });

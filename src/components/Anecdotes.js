@@ -17,7 +17,7 @@ const Anecdote = ({ anecdote }) => {
 
 const Anecdotes = () => {
   const anecdotes = useSelector((state) =>
-    state.sort((a, b) => a.votes < b.votes)
+    state.anecdotes.slice().sort((a, b) => a.votes > b.votes)
   );
 
   return (
