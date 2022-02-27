@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze";
 import anecdoteReducer from "./anecdoteReducer";
+import filterReducer from "./filterReducer";
 
 describe("unicafe reducer", () => {
   const initialState = [
@@ -42,6 +43,7 @@ describe("unicafe reducer", () => {
 
   test("new anecdotes can be added", () => {
     const state = [];
+
     const action = {
       type: "anecdotes/createAnecdote",
       payload: "Content",
