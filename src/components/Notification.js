@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { set } from "../reducers/notificationReducer";
+import { setNotification } from "../reducers/notificationReducer";
 
 const Notification = () => {
   const notification = useSelector((state) => state.notification);
@@ -9,7 +9,7 @@ const Notification = () => {
     clearInterval(window.t);
 
     window.t = setTimeout(() => {
-      dispatch(set(null));
+      dispatch(setNotification(null));
     }, 5000);
   };
 

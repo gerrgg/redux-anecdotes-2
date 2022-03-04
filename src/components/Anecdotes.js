@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { vote } from "../reducers/anecdoteReducer";
-import { set } from "../reducers/notificationReducer";
+import { setNotification } from "../reducers/notificationReducer";
 
 const Anecdote = ({ anecdote }) => {
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
-    dispatch(vote(anecdote.id));
-    dispatch(set(anecdote.content));
+    dispatch(vote(anecdote));
+    dispatch(setNotification(`you voted for "${anecdote.content}"!`));
   };
 
   return (
